@@ -1,0 +1,12 @@
+<app-ngx-select-with-search
+  [items]="items"
+  [placeholder]="'Select a bank'"
+  (selectedItem)="selectedItem($event)"
+></app-ngx-select-with-search>
+
+<app-select-with-search
+  [placeholder]="'New Placeholder'"
+  [items]="items"
+  [selector]="'name'"
+  (selectedItem)="selectedItem($event)"
+></app-select-with-search>

@@ -1,0 +1,15 @@
+.image-crop-container {
+  width: 100%;
+}
+
+.crop-button {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.mat-dialog-container {
+  padding-top: 0 !important;
+  padding-left: 5px !important;
+  padding-bottom: 5px !important;
+}

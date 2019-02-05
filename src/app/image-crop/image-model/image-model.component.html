@@ -1,0 +1,16 @@
+<div mat-dialog-actions [ngStyle]="{ width: modelWidth }">
+  <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="aspectRation"
+    [resizeToWidth]="imageWidth"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+  ></image-cropper>
+  <div fxLayout="row" class="crop-button" fxLayoutAlign="center center">
+    <button mat-raised-button color="primary" [mat-dialog-close]="croppedImage">
+      Crop Image
+    </button>
+    <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+  </div>
+</div>

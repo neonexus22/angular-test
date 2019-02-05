@@ -1,0 +1,22 @@
+<div [formGroup]="selectForm">
+  <mat-form-field>
+    <mat-select
+      [placeholder]="placeholder"
+      formControlName="item"
+      (selectionChange)="itemChanged($event)"
+    >
+      <mat-option class="option-search-input">
+        <input
+          class="search-input"
+          formControlName="filterItemInput"
+          (click)="$event.stopPropagation()"
+          (keyup)="filterSelect($event)"
+          autocomplete="off"
+        />
+      </mat-option>
+      <mat-option *ngFor="let item of filteredItem" [value]="item">
+        {{ item[selector] }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

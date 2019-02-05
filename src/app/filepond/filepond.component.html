@@ -1,0 +1,24 @@
+<file-pond
+  #myPond
+  (change)="doSth($event)"
+  [options]="pondOptions"
+  (oninit)="pondHandleInit()"
+  (onaddfile)="pondHandleAddFile($event)"
+>
+</file-pond>
+
+<button (click)="test.click()">click me</button>
+<input type="file" #test (change)="fileChangeEvent($event)" />
+
+<image-cropper
+  [imageChangedEvent]="imageChangedEvent"
+  [maintainAspectRatio]="true"
+  [aspectRatio]="4 / 3"
+  [resizeToWidth]="128"
+  format="png"
+  (imageCropped)="imageCropped($event)"
+  (imageLoaded)="imageLoaded()"
+  (loadImageFailed)="loadImageFailed()"
+></image-cropper>
+
+<img [src]="croppedImage" />

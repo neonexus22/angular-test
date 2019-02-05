@@ -1,0 +1,51 @@
+<div class="main-container">
+  <div
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    (click)="imageInput.click()"
+    class="image-container"
+    *ngIf="showButton"
+    #droppable
+  >
+    <mat-icon> publish</mat-icon>
+    <div>
+      <div>Upload your image here</div>
+    </div>
+  </div>
+
+  <div class="image-display">
+    <input
+      type="file"
+      #imageInput
+      hidden
+      (change)="handleImageChange($event)"
+    />
+    <div *ngIf="!showButton" style="position: relative;">
+      <img class="image-box" [src]="imagePreview" />
+      <div class="image-icon">
+        <mat-icon
+          class="icon-cancel"
+          (click)="cancelImage(); $event.stopPropagation()"
+          matTooltip="Cancel Image"
+          matTooltipPosition="above"
+          >cancel</mat-icon
+        >
+        <mat-icon
+          class="icon-edit"
+          matTooltip="Edit Image"
+          matTooltipPosition="above"
+          (click)="openDialog()"
+          >edit</mat-icon
+        >
+
+        <mat-icon
+          class="icon-edit"
+          matTooltip="Upload Image"
+          matTooltipPosition="above"
+          (click)="uploadImage()"
+          >publish</mat-icon
+        >
+      </div>
+    </div>
+  </div>
+</div>
