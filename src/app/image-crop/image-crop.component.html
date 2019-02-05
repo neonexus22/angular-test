@@ -5,6 +5,10 @@
     (click)="imageInput.click()"
     class="image-container"
     *ngIf="showButton"
+    (dragenter)="dragEnterFn($event)"
+    (dragleave)="dragLeaveFn($event)"
+    (dragover)="dragOverFn($event)"
+    (drop)="dropFn($event)"
     #droppable
   >
     <mat-icon> publish</mat-icon>
@@ -16,9 +20,10 @@
   <div class="image-display">
     <input
       type="file"
+      accept=".png, .jpg, .jpeg"
       #imageInput
       hidden
-      (change)="handleImageChange($event)"
+      (change)="onImageChange($event)"
     />
     <div *ngIf="!showButton" style="position: relative;">
       <img class="image-box" [src]="imagePreview" />
@@ -34,7 +39,7 @@
           class="icon-edit"
           matTooltip="Edit Image"
           matTooltipPosition="above"
-          (click)="openDialog()"
+          (click)="openEditDialog()"
           >edit</mat-icon
         >
 

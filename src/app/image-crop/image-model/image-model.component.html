@@ -1,6 +1,6 @@
 <div mat-dialog-actions [ngStyle]="{ width: modelWidth }">
   <image-cropper
-    [imageChangedEvent]="imageChangedEvent"
+    [imageBase64]="imageChangedEvent"
     [maintainAspectRatio]="true"
     [aspectRatio]="aspectRation"
     [resizeToWidth]="imageWidth"

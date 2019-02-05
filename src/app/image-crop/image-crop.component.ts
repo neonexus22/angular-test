@@ -22,20 +22,21 @@ export class ImageCropComponent implements OnInit {
   @Input() imageWidth: string;
   @Input() modelWidth: string;
 
-  @Output() croppedImageEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() uploadImageEvent: EventEmitter<any> = new EventEmitter<any>();
 
   @ViewChild("imageInput") imageInput: any;
   imageChangedEvent: any = "";
   showButton: boolean = true;
   imagePreview: any;
+  imagePreviewRaw: any;
   constructor(private dialog: MatDialog, private elementRef: ElementRef) {}
 
-  openDialog(): void {
+  openEditDialog(): void {
+    console.log("image source", this.imagePreview);
     const dialogRef = this.dialog.open(ImageModelComponent, {
       disableClose: true,
       data: {
-        imageChangedEvent: this.imageChangedEvent,
+        imageChangedEvent: this.imagePreviewRaw,
         aspectRation: this.aspectRation,
         imageWidth: this.imageWidth,
         modelWidth: this.modelWidth
@@ -46,46 +47,61 @@ export class ImageCropComponent implements OnInit {
       if (result) {
         this.imagePreview = result;
       }
-      this.croppedImageEvent.emit(this.imagePreview);
     });
   }
 
   ngOnInit() {}
 
-  ngAfterViewInit() {
-    console.log("here", this.droppable);
-    this.droppable.nativeElement.ondrop = event => {
-      console.log("new event", event);
-    };
-    // console.log(
-    //   this.elementRef.nativeElement
-    //     .querySelector(".image-container")
-    //     .addEventListener("drop", (event: any) => {
-    //       console.log("file event", event);
-    //     })
-    // );
-  }
+  dragEnterFn = event => {
+    event.preventDefault();
+    event.target.classList.add("add-border");
+  };
+  dragLeaveFn = event => {
+    event.preventDefault();
+    event.target.classList.remove("add-border");
+  };
+  dragOverFn = event => {
+    event.preventDefault();
+  };
+  dropFn = event => {
+    event.preventDefault();
+    event.target.classList.remove("add-border");
+    let dt = event.dataTransfer;
+    let files = dt.files;
+    this.imageChangedEvent = event;
+    this.handleImageChange(files[0]);
+  };
 
-  handleImageChange = (event: any) => {
+  onImageChange = (event: any) => {
+    this.imageChangedEvent = event;
     const file = event.target.files[0];
     if (file) {
-      this.imageChangedEvent = event;
-      this.showButton = false;
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagePreview = reader.result;
-      };
-      reader.readAsDataURL(file);
+      this.handleImageChange(file);
     }
+  };
+
+  handleImageChange = (file: any) => {
+    this.showButton = false;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result;
+      this.imagePreviewRaw = reader.result;
+    };
+    reader.readAsDataURL(file);
   };
 
   cancelImage = () => {
     this.imagePreview = "";
+    this.imagePreviewRaw = "";
     this.showButton = true;
     this.imageInput.nativeElement.value = "";
   };
 
   uploadImage = () => {
-    this.uploadImageEvent.emit(true);
+    const returnData = {
+      image: this.imagePreview,
+      upload: true
+    };
+    this.uploadImageEvent.emit(returnData);
   };
 }

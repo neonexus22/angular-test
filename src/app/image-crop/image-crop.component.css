@@ -64,6 +64,15 @@
   cursor: pointer;
 }
 
+.add-border {
+  border: 3px dashed cadetblue;
+  color: gray;
+}
+
+.remove-border {
+  border: 2px dashed gray;
+}
+
 .image-box {
   min-width: 100%;
   max-width: 100%;

@@ -3,13 +3,11 @@ import { TestComponent } from "./test/test.component";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
-import { FilepondComponent } from "./filepond/filepond.component";
 import { SelectWithSearchComponent } from "./select-with-search/select-with-search.component";
 import { NgxTestComponent } from "./ngx-test/ngx-test.component";
 import { NgxSelectWithSearchComponent } from "./ngx-select-with-search/ngx-select-with-search.component";
 
 const routes: Routes = [
-  { path: "", component: FilepondComponent, pathMatch: "full" },
   { path: "select", component: SelectWithSearchComponent },
   { path: "test", component: TestComponent },
   { path: "ngx-select", component: NgxSelectWithSearchComponent },

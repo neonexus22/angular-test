@@ -13,18 +13,13 @@ export class TestComponent implements OnInit {
   constructor(private domSanitizer: DomSanitizer, private http: HttpClient) {}
   ngOnInit() {}
 
-  croppedImageEvent = (event: any) => {
-    console.log("returned data", event);
-    this.base64Image = this.domSanitizer.bypassSecurityTrustUrl(event);
-    this.blob = this.dataURItoBlob(event);
-  };
-
-  uploadImageEvent = (event: boolean) => {
-    let formData = new FormData();
-    formData.append("name", this.blob, "test-image.png");
+  uploadImageEvent = (event: any) => {
+    this.base64Image = this.domSanitizer.bypassSecurityTrustUrl(event.image);
+    this.blob = this.dataURItoBlob(event.image);
+    const formData = new FormData();
+    formData.append("imageFile", this.blob);
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
         Authorization:
           "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJsaXRlQGdtYWlsLmNvbSIsInNjb3BlcyI6WyJST0xFX0FHRU5UIiwiUk9MRV9PV05FUiIsIlJPTEVfUFJFTUlVTV9BR0VOVCJdLCJpZGVudGlmaWVyIjoiU3RCalQzVFY1U2ROOWorVURUNVNsQT09IiwicGFyZW50X2lkZW50aWZpZXIiOiJ5OVpHc0RhRjJyV1l3dzlKU3dVb09nPT0iLCJ1c2VyX2lkIjoiSTVqaW5NVjF6TGxDeUdRdlpWNGx2Zz09IiwiZXhwIjoxNTQ5MzkzNTI2fQ.d24uExJQF_iVF3FGmpEA_xC261z3Zoh4GTxaz6buqdWwLWLx14tU14Zxd183crCfsmqVW7IdFi5uXlilONGDwg"
       })
