@@ -1,6 +1,8 @@
-<app-image-crop
-  [aspectRation]="5 / 3"
-  [imageWidth]="400"
-  [modelWidth]="'600px'"
-  (uploadImageEvent)="uploadImageEvent($event)"
-></app-image-crop>
+<div class="image-area">
+  <app-image-crop
+    [aspectRation]="5 / 3"
+    [imageWidth]="400"
+    [placeholder]="'Your image upload goes here'"
+    (uploadImageEvent)="uploadImageEvent($event)"
+  ></app-image-crop>
+</div>

@@ -20,7 +20,7 @@ export class ImageCropComponent implements OnInit {
 
   @Input() aspectRation: string;
   @Input() imageWidth: string;
-  @Input() modelWidth: string;
+  @Input() placeholder: string;
 
   @Output() uploadImageEvent: EventEmitter<any> = new EventEmitter<any>();
 
@@ -32,14 +32,12 @@ export class ImageCropComponent implements OnInit {
   constructor(private dialog: MatDialog, private elementRef: ElementRef) {}
 
   openEditDialog(): void {
-    console.log("image source", this.imagePreview);
     const dialogRef = this.dialog.open(ImageModelComponent, {
       disableClose: true,
       data: {
         imageChangedEvent: this.imagePreviewRaw,
         aspectRation: this.aspectRation,
-        imageWidth: this.imageWidth,
-        modelWidth: this.modelWidth
+        imageWidth: this.imageWidth
       }
     });
 

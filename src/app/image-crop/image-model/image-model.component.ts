@@ -10,7 +10,6 @@ import { ImageCroppedEvent } from "ngx-image-cropper";
 export class ImageModelComponent implements OnInit {
   aspectRation: string;
   imageWidth: string;
-  modelWidth: string;
   imageChangedEvent: any;
   croppedImage: any;
   constructor(
@@ -22,7 +21,6 @@ export class ImageModelComponent implements OnInit {
     this.imageChangedEvent = this.data.imageChangedEvent;
     this.aspectRation = this.data.aspectRation;
     this.imageWidth = this.data.imageWidth;
-    this.modelWidth = this.data.modelWidth;
   }
 
   onCancel(): void {
