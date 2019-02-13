@@ -18,6 +18,7 @@ import { NgxSelectWithSearchComponent } from "./ngx-select-with-search/ngx-selec
 import { NgxTestComponent } from "./ngx-test/ngx-test.component";
 import { ImageCropComponent } from "./image-crop/image-crop.component";
 import { ImageModelComponent } from "./image-crop/image-model/image-model.component";
+import { NumberOnlyDirective } from './number-only.directive';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ImageModelComponent } from "./image-crop/image-model/image-model.compon
     NgxSelectWithSearchComponent,
     NgxTestComponent,
     ImageModelComponent,
-    ImageCropComponent
+    ImageCropComponent,
+    NumberOnlyDirective
   ],
   imports: [
     BrowserModule,

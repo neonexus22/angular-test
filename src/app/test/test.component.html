@@ -6,3 +6,15 @@
     (uploadImageEvent)="uploadImageEvent($event)"
   ></app-image-crop>
 </div>
+<div style="margin-top: 50px;">
+  <mat-form-field>
+    <input
+      matInput
+      NumberOnly
+      type="number"
+      [maxAllowedNumber]="10000"
+      placeholder="Less than 10000"
+      autocomplete="off"
+    />
+  </mat-form-field>
+</div>
