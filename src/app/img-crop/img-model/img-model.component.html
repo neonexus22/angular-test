@@ -1,0 +1,54 @@
+<div class="model-width">
+  <angular-cropper
+    [cropperOptions]="config"
+    [imageUrl]="imageUrl"
+    #cropImage
+  ></angular-cropper>
+  <div fxLayout="row" style="margin-top: 20px;">
+    <div style="text-align: left; width: 100%;">
+      <button
+        mat-raised-button
+        (click)="onZoomIn()"
+        class="mr-10"
+        color="accent"
+      >
+        <mat-icon>zoom_in</mat-icon>
+      </button>
+      <button
+        (click)="onZoomOut()"
+        mat-raised-button
+        class="mr-10"
+        color="accent"
+      >
+        <mat-icon>zoom_out</mat-icon>
+      </button>
+      <button
+        (click)="onRotateLeft()"
+        mat-raised-button
+        class="mr-10"
+        color="accent"
+      >
+        <mat-icon>rotate_left</mat-icon>
+      </button>
+      <button
+        (click)="onRotateRight()"
+        mat-raised-button
+        class="mr-10"
+        color="accent"
+      >
+        <mat-icon>rotate_right</mat-icon>
+      </button>
+      <button (click)="onReset()" mat-raised-button color="accent">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+    <div style="text-align: right; width: 50%;">
+      <button mat-raised-button [mat-dialog-close]="cropImage" color="primary">
+        Crop
+      </button>
+      <button mat-raised-button class="ml-10" (click)="onCancel()">
+        Close
+      </button>
+    </div>
+  </div>
+</div>

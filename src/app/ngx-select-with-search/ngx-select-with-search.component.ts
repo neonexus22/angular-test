@@ -68,11 +68,6 @@ export class NgxSelectWithSearchComponent implements OnInit {
         takeUntil(this._onDestroy)
       )
       .subscribe(() => {
-        // setting the compareWith property to a comparison function
-        // triggers initializing the selection according to the initial value of
-        // the form control (i.e. _initializeSelection())
-        // this needs to be done after the filteredItems are loaded initially
-        // and after the mat-option elements are available
         this.singleSelect.compareWith = (a: any, b: any) =>
           a && b && a.id === b.id;
       });

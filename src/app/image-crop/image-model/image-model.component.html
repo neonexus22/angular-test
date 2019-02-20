@@ -1,9 +1,8 @@
 <div mat-dialog-actions class="modal-width">
   <image-cropper
     [imageBase64]="imageChangedEvent"
-    [maintainAspectRatio]="true"
-    [aspectRatio]="aspectRation"
     [resizeToWidth]="imageWidth"
+    [cropper]="cropper"
     format="png"
     (imageCropped)="imageCropped($event)"
   ></image-cropper>

@@ -11,7 +11,19 @@ export class TestComponent implements OnInit {
   base64Image: any;
   blob: any;
   constructor(private domSanitizer: DomSanitizer, private http: HttpClient) {}
-  ngOnInit() {}
+  ngOnInit() {
+    const url = "http://oi64.tinypic.com/jackg1.jpg";
+    let img = document.createElement("img");
+    img.setAttribute("src", url);
+    console.log("image element", img);
+    const canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    console.log("canvas", canvas);
+    let ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    console.log(ctx);
+  }
 
   dataURItoBlob(dataURI) {
     // convert base64/URLEncoded data component to raw binary data held in a string
@@ -34,6 +46,10 @@ export class TestComponent implements OnInit {
 
     return new Blob([ia], { type: mimeString });
   }
+
+  uploadImageEventTest = (event: any) => {
+    console.log("final received", event);
+  };
 
   uploadImageEvent = (event: any) => {
     this.base64Image = this.domSanitizer.bypassSecurityTrustUrl(event.image);

@@ -18,7 +18,10 @@ import { NgxSelectWithSearchComponent } from "./ngx-select-with-search/ngx-selec
 import { NgxTestComponent } from "./ngx-test/ngx-test.component";
 import { ImageCropComponent } from "./image-crop/image-crop.component";
 import { ImageModelComponent } from "./image-crop/image-model/image-model.component";
-import { NumberOnlyDirective } from './number-only.directive';
+import { NumberOnlyDirective } from "./number-only.directive";
+import { ImgCropComponent } from "./img-crop/img-crop.component";
+import { ImgModelComponent } from "./img-crop/img-model/img-model.component";
+import { AngularCropperjsModule } from "angular-cropperjs";
 
 @NgModule({
   declarations: [
@@ -29,7 +32,9 @@ import { NumberOnlyDirective } from './number-only.directive';
     NgxTestComponent,
     ImageModelComponent,
     ImageCropComponent,
-    NumberOnlyDirective
+    NumberOnlyDirective,
+    ImgCropComponent,
+    ImgModelComponent
   ],
   imports: [
     BrowserModule,
@@ -40,10 +45,11 @@ import { NumberOnlyDirective } from './number-only.directive';
     ReactiveFormsModule,
     MaterialModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularCropperjsModule
   ],
   providers: [],
-  entryComponents: [ImageModelComponent],
+  entryComponents: [ImageModelComponent, ImgModelComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

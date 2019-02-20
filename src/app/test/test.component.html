@@ -6,6 +6,16 @@
     (uploadImageEvent)="uploadImageEvent($event)"
   ></app-image-crop>
 </div>
+
+<div class="image-area">
+  <app-img-crop
+    [aspectRation]="5 / 3"
+    [imageWidth]="800"
+    [placeholder]="'Your image upload goes here'"
+    (uploadImageEvent)="uploadImageEventTest($event)"
+  ></app-img-crop>
+</div>
+
 <div style="margin-top: 50px;">
   <mat-form-field>
     <input

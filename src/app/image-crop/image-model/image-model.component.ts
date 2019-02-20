@@ -12,6 +12,7 @@ export class ImageModelComponent implements OnInit {
   imageWidth: string;
   imageChangedEvent: any;
   croppedImage: any;
+  cropper = { x1: 100, y1: 100, x2: 200, y2: 200 };
   constructor(
     public dialogRef: MatDialogRef<ImageModelComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any

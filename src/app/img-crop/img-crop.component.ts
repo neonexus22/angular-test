@@ -1,52 +1,32 @@
+import { ImgModelComponent } from "./img-model/img-model.component";
 import {
   Component,
   OnInit,
-  ViewChild,
   Input,
   Output,
   EventEmitter,
-  ElementRef
+  ElementRef,
+  ViewChild
 } from "@angular/core";
 import { MatDialog } from "@angular/material";
-import { ImageModelComponent } from "./image-model/image-model.component";
 
 @Component({
-  selector: "app-image-crop",
-  templateUrl: "./image-crop.component.html",
-  styleUrls: ["./image-crop.component.css"]
+  selector: "app-img-crop",
+  templateUrl: "./img-crop.component.html",
+  styleUrls: ["./img-crop.component.css"]
 })
-export class ImageCropComponent implements OnInit {
-  @ViewChild("droppable") droppable: any;
-
+export class ImgCropComponent implements OnInit {
   @Input() aspectRation: string;
   @Input() imageWidth: string;
   @Input() placeholder: string;
-
   @Output() uploadImageEvent: EventEmitter<any> = new EventEmitter<any>();
 
   @ViewChild("imageInput") imageInput: any;
-  imageChangedEvent: any = "";
+
   showButton = true;
   imagePreview: any;
   imagePreviewRaw: any;
   constructor(private dialog: MatDialog, private elementRef: ElementRef) {}
-
-  openEditDialog(): void {
-    const dialogRef = this.dialog.open(ImageModelComponent, {
-      disableClose: true,
-      data: {
-        imageChangedEvent: this.imagePreviewRaw,
-        aspectRation: this.aspectRation,
-        imageWidth: this.imageWidth
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.imagePreview = result;
-      }
-    });
-  }
 
   ngOnInit() {}
 
@@ -66,12 +46,10 @@ export class ImageCropComponent implements OnInit {
     event.target.classList.remove("add-border");
     const dt = event.dataTransfer;
     const files = dt.files;
-    this.imageChangedEvent = event;
     this.handleImageChange(files[0]);
   };
 
   onImageChange = (event: any) => {
-    this.imageChangedEvent = event;
     const file = event.target.files[0];
     if (file) {
       this.handleImageChange(file);
@@ -88,13 +66,32 @@ export class ImageCropComponent implements OnInit {
     reader.readAsDataURL(file);
   };
 
-  cancelImage = () => {
+  cancelImage = (event: any) => {
     this.imagePreview = "";
     this.imagePreviewRaw = "";
     this.showButton = true;
     this.imageInput.nativeElement.value = "";
   };
 
+  openEditDialog = () => {
+    const dialogRef = this.dialog.open(ImgModelComponent, {
+      disableClose: true,
+      data: {
+        image: this.imagePreviewRaw,
+        aspectRation: this.aspectRation
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.imagePreview = result.cropper
+          .getCroppedCanvas({
+            maxWidth: this.imageWidth
+          })
+          .toDataURL("image/jpeg");
+      }
+    });
+  };
   uploadImage = () => {
     const returnData = {
       image: this.imagePreview,

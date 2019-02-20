@@ -1,0 +1,25 @@
+.ml-10 {
+  margin-left: 10px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .model-width {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .model-width {
+    width: 650px;
+  }
+}
+
+@media only screen and (min-device-width: 1024px) {
+  .model-width {
+    width: 800px;
+  }
+}
